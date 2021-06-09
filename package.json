@@ -39,6 +39,7 @@
   },
   "proxy": "http://localhost:8080/",
   "devDependencies": {
+    "bootstrap": "^5.0.1",
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2",
     "standard": "^16.0.3"
