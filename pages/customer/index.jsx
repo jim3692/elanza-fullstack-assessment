@@ -9,7 +9,7 @@ export default function CustomerHomePage () {
       <label htmlFor='request'>Request</label>
       <input id='request' name='request' type='text' multiple />
       <br />
-      <label htmlFor='data'>Request Date</label>
+      <label htmlFor='date'>Request Date</label>
       <input id='date' name='date' type='date' />
       <button type='submit'>Send</button>
     </form>
