@@ -1,12 +1,24 @@
 const express = require('express')
+const next = require('next')
+
+const api = require('./src/api')
+
 const app = express()
+const dev = process.env.NODE_ENV !== 'production'
+const nextApp = next({ dev })
+const handle = nextApp.getRequestHandler()
 
-// this is the in-memory database ;)
-let counter = 0
+app.use('/api', api)
 
-app.get('/api/data', function (req, res) {
-  counter++
-  return res.json({ name: 'sunshine', counter: counter })
-})
+app.get('*', handle)
 
-app.listen(process.env.PORT || 8080)
+nextApp
+  .prepare()
+  .then(() => {
+    app.listen(process.env.PORT || 8080, () => console.log('listening'))
+  })
+  .catch((ex) => {
+    // eslint-disable-next-line no-console
+    console.error(ex.stack)
+    process.exit(1)
+  })
