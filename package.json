@@ -45,7 +45,7 @@
   },
   "standard": {
     "globals": [
-      "fetch"
+      "localStorage"
     ]
   }
 }
