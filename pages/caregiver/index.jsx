@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from '../../src/components/axios'
 
 export default function CaregiverOverviewPage () {
   const [requests, setRequests] = useState([])
