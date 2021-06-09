@@ -3,6 +3,17 @@ const { careRequests } = require('../../database')
 
 const router = Router()
 
+router.use((req, res, next) => {
+  if (!JSON.parse(req.header('X-IS-CAREGIVER') || false)) {
+    return res.status(401)
+      .json({
+        error: 'You are not a caregiver.'
+      })
+  }
+
+  return next()
+})
+
 router.get('/care-requests', getCareRequests)
 router.get('/care-requests/:id', getCareRequestDetails)
 router.post('/care-requests/apply', postCareRequestApply)
