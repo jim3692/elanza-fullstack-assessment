@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
 import Navbar from 'react-bootstrap/Navbar'
 
 export default function NavBar () {

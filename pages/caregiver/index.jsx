@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from '../../src/components/axios'
 
+import RequestList from '../../src/pages/caregiver/request-list'
+import RequestModal from '../../src/pages/caregiver/request-modal'
+
 export default function CaregiverOverviewPage () {
   const [requests, setRequests] = useState([])
   const [details, setDetails] = useState(null)
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(
     () => {
@@ -18,6 +22,7 @@ export default function CaregiverOverviewPage () {
   const handleRequestClick = id => axios('/api/caregiver/care-requests/' + id)
     .then(res => res.data)
     .then(setDetails)
+    .then(() => setShowModal(true))
     .catch(console.error) // TODO
 
   const handleRequestApplyClick = id => axios.post('/api/caregiver/care-requests/apply', { id, apply: true })
@@ -27,27 +32,8 @@ export default function CaregiverOverviewPage () {
 
   return (
     <div>
-      <ul>
-        {requests.map(request => (
-          <div key={request.id} onClick={() => handleRequestClick(request.id)}>{request.customerName}</div>
-        ))}
-      </ul>
-      {details && (
-        <div>
-          <label htmlFor='name'>Customer Name</label>
-          <input id='name' type='text' value={details.customerName} disabled />
-          <br />
-          <label htmlFor='request'>Request</label>
-          <input id='request' type='text' value={details.request} disabled />
-          <br />
-          <label htmlFor='date'>Request Date</label>
-          <input id='date' type='date' value={details.date} disabled />
-          <label htmlFor='applied'>Applied</label>
-          <br />
-          <input id='applied' type='checkbox' checked={details.applied} disabled />
-          <button onClick={() => handleRequestApplyClick(details.id)}>Apply for request</button>
-        </div>
-      )}
+      <RequestList requests={requests} handleRequestClick={handleRequestClick} />
+      {details && <RequestModal request={details} showModal={showModal} setShowModal={setShowModal} handleRequestApplyClick={() => handleRequestApplyClick(details.id)} />}
     </div>
   )
 }
