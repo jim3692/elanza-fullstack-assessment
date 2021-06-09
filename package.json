@@ -8,9 +8,11 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.1",
     "express": "^4.17.1",
     "next": "^10.2.3",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.6.1",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1"
   },
@@ -39,7 +41,6 @@
   },
   "proxy": "http://localhost:8080/",
   "devDependencies": {
-    "bootstrap": "^5.0.1",
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2",
     "standard": "^16.0.3"

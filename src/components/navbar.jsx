@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
+import Container from 'react-bootstrap/Container'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Navbar from 'react-bootstrap/Navbar'
+
 export default function NavBar () {
   const localStorage = (typeof window !== 'undefined' && window.localStorage) || null
 
@@ -13,9 +18,14 @@ export default function NavBar () {
   const handleIsCaregiverChange = event => setIsCaregiver(event.target.checked)
 
   return (
-    <div>
-      <label htmlFor='is-caregiver'>Caregiver</label>
-      <input id='is-caregiver' type='checkbox' checked={isCaregiver} onChange={handleIsCaregiverChange} />
-    </div>
+    <Navbar bg='light' expand='lg'>
+      <Navbar.Brand>Elanza Assignment</Navbar.Brand>
+      <Form className='d-flex'>
+        <Form.Check>
+          <Form.Check.Input type='checkbox' isValid checked={isCaregiver} onChange={handleIsCaregiverChange} />
+          <Form.Check.Label>Caregiver</Form.Check.Label>
+        </Form.Check>
+      </Form>
+    </Navbar>
   )
 }
