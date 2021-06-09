@@ -10,6 +10,7 @@ const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 app.use('/api', api)
 
 app.get('*', handle)

@@ -6,14 +6,21 @@ export default function CaregiverOverviewPage () {
   const [details, setDetails] = useState(null)
 
   useEffect(
-    () => axios('/api/caregiver/care-requests')
-      .then(res => res.data)
-      .then(setRequests)
-      .catch(console.error) // TODO
+    () => {
+      axios('/api/caregiver/care-requests')
+        .then(res => res.data)
+        .then(setRequests)
+        .catch(console.error) // TODO
+    }
     , []
   )
 
   const handleRequestClick = id => axios('/api/caregiver/care-requests/' + id)
+    .then(res => res.data)
+    .then(setDetails)
+    .catch(console.error) // TODO
+
+  const handleRequestApplyClick = id => axios.post('/api/caregiver/care-requests/apply', { id, apply: true })
     .then(res => res.data)
     .then(setDetails)
     .catch(console.error) // TODO
@@ -35,6 +42,10 @@ export default function CaregiverOverviewPage () {
           <br />
           <label htmlFor='date'>Request Date</label>
           <input id='date' type='date' value={details.date} disabled />
+          <label htmlFor='applied'>Applied</label>
+          <br />
+          <input id='applied' type='checkbox' checked={details.applied} disabled />
+          <button onClick={() => handleRequestApplyClick(details.id)}>Apply for request</button>
         </div>
       )}
     </div>

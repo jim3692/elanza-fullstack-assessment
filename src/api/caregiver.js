@@ -5,13 +5,14 @@ const router = Router()
 
 router.get('/care-requests', getCareRequests)
 router.get('/care-requests/:id', getCareRequestDetails)
+router.post('/care-requests/apply', postCareRequestApply)
 
 function getCareRequests (req, res) {
   return res.json(careRequests.data)
 }
 
 function getCareRequestDetails (req, res) {
-  const careRequest = careRequests.data.find(request => request.id.toString() === req.params.id.toString())
+  const careRequest = careRequests.data.find(request => request.id.toString() === req.params.id?.toString())
 
   if (!careRequest) {
     return res.status(404)
@@ -20,6 +21,20 @@ function getCareRequestDetails (req, res) {
       })
   }
 
+  return res.json(careRequest)
+}
+
+function postCareRequestApply (req, res) {
+  const careRequest = careRequests.data.find(request => request.id.toString() === req.body.id?.toString())
+
+  if (!careRequest) {
+    return res.status(404)
+      .json({
+        error: `Care request ${req.params.id} not found.`
+      })
+  }
+
+  careRequest.applied = req.body.apply
   return res.json(careRequest)
 }
 
