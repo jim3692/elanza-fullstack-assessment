@@ -6,7 +6,7 @@ export default function NavBar () {
   const [isCaregiver, setIsCaregiver] = useState(false)
 
   useEffect(() => setIsCaregiver(
-    JSON.parse(localStorage?.isCaregiver) || false
+    JSON.parse(localStorage?.isCaregiver || false)
   ), [])
   useEffect(() => localStorage?.setItem('isCaregiver', isCaregiver), [isCaregiver, localStorage])
 
